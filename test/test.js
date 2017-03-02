@@ -7,14 +7,12 @@ describe('currentCount', function() {
     const repeat = 5
     const t = new Timer(2, 5)
     const s = spy()
-    expect(t.currentCount()).to.equal(0)
+    expect(t.currentCount).to.equal(0)
     t.start()
     t.addEventListener(Timer.TIMER, (evt) => {
       s()
-      expect(t.currentCount()).to.equal(s.callCount)
-      t.currentCount(5)
-      expect(t.currentCount()).to.equal(s.callCount)
-      if (t.currentCount() === repeat) {
+      expect(t.currentCount).to.equal(s.callCount)
+      if (t.currentCount === repeat) {
         done()
       }
     })
@@ -35,7 +33,7 @@ describe('delay', function() {
     const multiplier = 1.5
     t.addEventListener(Timer.TIMER, () => {
       nows.push(Date.now())
-      const currentCount = t.currentCount()
+      const { currentCount } = t
       const odd = currentCount % 2
       if (currentCount > 3) {
         const diff = nows[currentCount - 1] - nows[currentCount - 2]
@@ -67,13 +65,13 @@ describe('delay', function() {
     const s = spy()
     t.addEventListener(Timer.TIMER, () => {
       s()
-      if (t.currentCount() === 3) {
+      if (t.currentCount === 3) {
         t.stop()
         t.delay(40)
         setTimeout(() => {
-          expect(t.currentCount()).to.equal(3)
+          expect(t.currentCount).to.equal(3)
           setTimeout(() => {
-            expect(t.currentCount()).to.equal(5) //check behavior of flash
+            expect(t.currentCount).to.equal(5) //check behavior of flash
             done()
           }, 50)
           t.start()
@@ -93,7 +91,7 @@ describe('repeatCount', function() {
       s()
     })
     t.addEventListener(Timer.TIMER_COMPLETE, () => {
-      expect(t.repeatCount()).to.equal(repeat)
+      expect(t.repeatCount).to.equal(repeat)
       expect(s.callCount).to.equal(repeat)
       done()
     })
@@ -106,12 +104,12 @@ describe('repeatCount', function() {
     const s = spy()
     t.addEventListener(Timer.TIMER, () => {
       s()
-      if (t.currentCount() === 3) {
-        t.repeatCount(repeat)
+      if (t.currentCount === 3) {
+        t.repeatCount = repeat
       }
     })
     t.addEventListener(Timer.TIMER_COMPLETE, () => {
-      expect(t.repeatCount()).to.equal(repeat)
+      expect(t.repeatCount).to.equal(repeat)
       expect(s.callCount).to.equal(repeat)
       done()
     })
@@ -122,11 +120,11 @@ describe('repeatCount', function() {
 describe('running', function() {
   it('reveals when is running', function(done) {
     const t = new Timer(2, 3)
-    expect(t.running()).to.equal(false)
+    expect(t.running).to.equal(false)
     t.start()
-    expect(t.running()).to.equal(true)
+    expect(t.running).to.equal(true)
     t.addEventListener(Timer.TIMER_COMPLETE, () => {
-      expect(t.running()).to.equal(false)
+      expect(t.running).to.equal(false)
       done()
     })
   })
@@ -136,13 +134,13 @@ describe('reset', function() {
   it('resets and stops timer while running', function(done) {
     const t = new Timer(2, 5)
     t.start()
-    expect(t.running()).to.equal(true)
+    expect(t.running).to.equal(true)
     t.addEventListener(Timer.TIMER, () => {
-      expect(t.running()).to.equal(true)
-      expect(t.currentCount()).to.equal(1)
+      expect(t.running).to.equal(true)
+      expect(t.currentCount).to.equal(1)
       t.reset()
-      expect(t.running()).to.equal(false)
-      expect(t.currentCount()).to.equal(0)
+      expect(t.running).to.equal(false)
+      expect(t.currentCount).to.equal(0)
       done()
     })
   })
@@ -150,15 +148,15 @@ describe('reset', function() {
   it('resets and stops timer while running', function(done) {
     const t = new Timer(2, 5)
     t.start()
-    expect(t.running()).to.equal(true)
+    expect(t.running).to.equal(true)
     t.addEventListener(Timer.TIMER, () => {
-      expect(t.running()).to.equal(true)
+      expect(t.running).to.equal(true)
       t.stop()
-      expect(t.running()).to.equal(false)
-      expect(t.currentCount()).to.equal(1)
+      expect(t.running).to.equal(false)
+      expect(t.currentCount).to.equal(1)
       t.reset()
-      expect(t.running()).to.equal(false)
-      expect(t.currentCount()).to.equal(0)
+      expect(t.running).to.equal(false)
+      expect(t.currentCount).to.equal(0)
       done()
     })
   })
@@ -167,11 +165,11 @@ describe('reset', function() {
 describe('start', function() {
   it('starts timer when stopped', function(done) {
     const t = new Timer(2, 5)
-    expect(t.running()).to.equal(false)
+    expect(t.running).to.equal(false)
     t.start()
-    expect(t.running()).to.equal(true)
+    expect(t.running).to.equal(true)
     t.addEventListener(Timer.TIMER, () => {
-      expect(t.running()).to.equal(true)
+      expect(t.running).to.equal(true)
       t.stop()
       done()
     })
@@ -179,13 +177,13 @@ describe('start', function() {
 
   it('does nothing while running', function(done) {
     const t = new Timer(2, 5)
-    expect(t.running()).to.equal(false)
+    expect(t.running).to.equal(false)
     t.start()
-    expect(t.running()).to.equal(true)
+    expect(t.running).to.equal(true)
     t.addEventListener(Timer.TIMER, () => {
-      expect(t.running()).to.equal(true)
+      expect(t.running).to.equal(true)
       t.start()
-      expect(t.running()).to.equal(true)
+      expect(t.running).to.equal(true)
       t.stop()
       done()
     })
@@ -196,13 +194,13 @@ describe('stop', function() {
   it('stops timer while running', function(done) {
     const t = new Timer(2, 5)
     const s = spy()
-    expect(t.running()).to.equal(false)
+    expect(t.running).to.equal(false)
     t.start()
-    expect(t.running()).to.equal(true)
+    expect(t.running).to.equal(true)
     t.addEventListener(Timer.TIMER, () => {
       s()
       t.stop()
-      expect(t.running()).to.equal(false)
+      expect(t.running).to.equal(false)
       expect(s.callCount).to.equal(1)
       done()
     })
@@ -211,16 +209,16 @@ describe('stop', function() {
   it('does nothing while stopped', function(done) {
     const t = new Timer(2, 5)
     const s = spy()
-    expect(t.running()).to.equal(false)
+    expect(t.running).to.equal(false)
     t.start()
-    expect(t.running()).to.equal(true)
+    expect(t.running).to.equal(true)
     t.addEventListener(Timer.TIMER, () => {
       s()
       t.stop()
-      expect(t.running()).to.equal(false)
+      expect(t.running).to.equal(false)
       expect(s.callCount).to.equal(1)
       t.stop()
-      expect(t.running()).to.equal(false)
+      expect(t.running).to.equal(false)
       expect(s.callCount).to.equal(1)
       done()
     })

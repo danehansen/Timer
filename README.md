@@ -43,20 +43,22 @@ In your browser:
 * __TIMER&#95;COMPLETE__ : String = 'TIMER&#95;COMPLETE'  
 [static] The Timer.TIMER&#95;COMPLETE constant defines the value of the type property of a timerComplete event object.
 
+##Public Properties
+* __currentCount__ : int  
+[read-only] The total number of times the timer has fired since it started at zero.
+* __running__ : Boolean  
+[read-only] The timer's current state; true if the timer is running, otherwise false.
+
 ##Public Methods
 
 * __Timer__(delay:Number, repeatCount:int = 0)  
 Constructs a new Timer object with the specified delay and repeatCount states.
-* __currentCount__():int  
-Gets the total number of times the timer has fired since it started at zero.
 * __delay__(value:Number):*  
 Gets or sets the delay, in milliseconds, between timer events.
 * __repeatCount__(value:int):*  
 Gets or sets the total number of times the timer is set to run.
 * __reset__()  
 Stops the timer, if it is running, and sets the currentCount property back to 0, like the reset button of a stopwatch.
-* __running__():Boolean  
-Gets the timer’s current state; true if the timer is running, otherwise false.
 * __start__()  
 Starts the timer, if it is not already running.
 * __stop__()  
