@@ -58,7 +58,6 @@ var Timer = function (_EventDispatcher) {
     };
 
     _this.destroy = function () {
-      // TODO write test for this
       _this.stop();
       _this.clearEventListeners();
     };
