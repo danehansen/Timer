@@ -63,6 +63,11 @@ export default class Timer extends EventDispatcher {
         }
       }
 
+      destroy = () => {
+        this.stop()
+        this.clearEventListeners()
+      }
+
     //private
 
       _increment = () => {

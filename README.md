@@ -1,4 +1,4 @@
-#Timer
+# Timer
 
 __Class__ : public class [Timer](https://github.com/danehansen/Timer)  
 __Inheritance__ : [Timer](https://github.com/danehansen/Timer) > [EventDispatcher](https://github.com/danehansen/EventDispatcher) > Object
@@ -7,11 +7,11 @@ The Timer class is the interface to setTimeout and setInterval, and is totally r
 
 You can create Timer objects to run once or repeat at specified intervals to execute code on a schedule.
 
-##Installation
+## Installation
 
 `npm install --save @danehansen/timer`
 
-##Usage
+## Usage
 
 As a module:
 
@@ -36,20 +36,20 @@ In your browser:
       t.addEventListener(Timer.TIMER, onTimer);
     </script>
 
-##Public Constants
+## Public Constants
 
 * __TIMER__ : String = 'TIMER'  
-[static] The Timer.TIMER constant defines the value of the type property of a timer event object.
+[static] The Timer.TIMER constant defines the value of the type property of a TIMER event object.
 * __TIMER&#95;COMPLETE__ : String = 'TIMER&#95;COMPLETE'  
-[static] The Timer.TIMER&#95;COMPLETE constant defines the value of the type property of a timerComplete event object.
+[static] The Timer.TIMER&#95;COMPLETE constant defines the value of the type property of a TIMER&#95;COMPLETE event object.
 
-##Public Properties
+## Public Properties
 * __currentCount__ : int  
 [read-only] The total number of times the timer has fired since it started at zero.
 * __running__ : Boolean  
 [read-only] The timer's current state; true if the timer is running, otherwise false.
 
-##Public Methods
+## Public Methods
 
 * __Timer__(delay:Number, repeatCount:int = 0)  
 Constructs a new Timer object with the specified delay and repeatCount states.
@@ -64,7 +64,7 @@ Starts the timer, if it is not already running.
 * __stop__()  
 Stops the timer.
 
-##Events
+## Events
 
 * __TIMER__  
 Dispatched whenever a Timer object reaches an interval specified according to the Timer.delay property.

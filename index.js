@@ -1,8 +1,10 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -13,107 +15,109 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var EventDispatcher = typeof __BROWSER__ === 'undefined' ? require('@danehansen/event-dispatcher').default : ((window || {}).danehansen || {}).EventDispatcher || {};
 
 var Timer = function (_EventDispatcher) {
-	_inherits(Timer, _EventDispatcher);
+  _inherits(Timer, _EventDispatcher);
 
-	function Timer(delay) {
-		var repeatCount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  function Timer(delay) {
+    var repeatCount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-		_classCallCheck(this, Timer);
+    _classCallCheck(this, Timer);
 
-		var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this));
+    var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this));
 
-		_this.currentCount = function () {
-			return _this._currentCount;
-		};
+    _this.delay = function (num) {
+      if (num === undefined) {
+        return _this._delay;
+      }
+      _this._delay = num;
+      if (_this._running) {
+        _this.stop();
+        _this._timeLeft = _this._delay;
+        _this.start();
+      }
+    };
 
-		_this.delay = function (num) {
-			if (typeof num === 'number') {
-				_this._delay = num;
-				if (_this._running) {
-					_this.stop();
-					_this._timeLeft = _this._delay;
-					_this.start();
-				}
-			} else {
-				return _this._delay;
-			}
-		};
+    _this.reset = function () {
+      _this.stop();
+      _this._timeLeft = _this._delay;
+      _this._currentCount = 0;
+    };
 
-		_this.repeatCount = function (num) {
-			if (typeof num === 'number') {
-				_this._repeatCount = num;
-			} else {
-				return _this._repeatCount;
-			}
-		};
+    _this.start = function () {
+      if (!_this._running) {
+        _this._running = true;
+        _this._increment();
+      }
+    };
 
-		_this.running = function () {
-			return _this._running;
-		};
+    _this.stop = function () {
+      if (_this._running) {
+        clearTimeout(_this._timeout);
+        _this._timeLeft = _this._delay - Date.now() + _this._lastTime;
+        _this._running = false;
+      }
+    };
 
-		_this.reset = function () {
-			_this.stop();
-			_this._timeLeft = _this._delay;
-			_this._currentCount = 0;
-		};
+    _this.destroy = function () {
+      // TODO write test for this
+      _this.stop();
+      _this.clearEventListeners();
+    };
 
-		_this.start = function () {
-			if (!_this._running) {
-				_this._running = true;
-				_this._increment();
-			}
-		};
+    _this._increment = function () {
+      _this._lastTime = Date.now();
+      _this._timeout = setTimeout(_this._onTimer, _this._timeLeft);
+      _this._timeLeft = _this._delay;
+    };
 
-		_this.stop = function () {
-			if (_this._running) {
-				clearTimeout(_this._timeout);
-				_this._timeLeft = _this._delay - Date.now() + _this._lastTime;
-				_this._running = false;
-			}
-		};
+    _this._onTimer = function () {
+      _this._currentCount++;
+      _this.dispatchEvent(Timer.TIMER);
+      if (_this._running) {
+        if (!_this.repeatCount || _this._currentCount < _this.repeatCount) {
+          _this._increment();
+        } else {
+          _this._onTimerComplete();
+        }
+      }
+    };
 
-		_this._increment = function () {
-			_this._lastTime = Date.now();
-			_this._timeout = setTimeout(_this._onTimer, _this._timeLeft);
-			_this._timeLeft = _this._delay;
-		};
+    _this._onTimerComplete = function () {
+      _this._running = false;
+      _this.dispatchEvent(Timer.TIMER_COMPLETE);
+    };
 
-		_this._onTimer = function () {
-			_this._currentCount++;
-			_this.dispatchEvent(Timer.TIMER);
-			if (_this._running) {
-				if (!_this._repeatCount || _this._currentCount < _this._repeatCount) {
-					_this._increment();
-				} else {
-					_this._onTimerComplete();
-				}
-			}
-		};
+    _this._currentCount = 0;
+    _this._delay = delay;
+    _this._lastTime = null;
+    _this.repeatCount = repeatCount;
+    _this._running = false;
+    _this._timeLeft = delay;
+    _this._timeout = null;
+    return _this;
+  }
 
-		_this._onTimerComplete = function () {
-			_this._running = false;
-			_this.dispatchEvent(Timer.TIMER_COMPLETE);
-		};
+  // getters/setters
 
-		_this._currentCount = 0;
-		_this._delay = delay;
-		_this._lastTime = null;
-		_this.repeatCount(repeatCount);
-		_this._running = false;
-		_this._timeLeft = delay;
-		_this._timeout = null;
-		return _this;
-	}
+  _createClass(Timer, [{
+    key: 'currentCount',
+    get: function get() {
+      return this._currentCount;
+    }
+  }, {
+    key: 'running',
+    get: function get() {
+      return this._running;
+    }
 
-	// getters/setters
+    //methods
 
-	//methods
+    //public
 
-	//public
+    //private
 
-	//private
+  }]);
 
-	return Timer;
+  return Timer;
 }(EventDispatcher);
 
 Timer.TIMER = 'TIMER';

@@ -224,3 +224,38 @@ describe('stop', function() {
     })
   })
 })
+
+describe('destroy', function() {
+  it('stops the timer', function(done) {
+    const s = spy()
+    const t = new Timer(2)
+    t.addEventListener(Timer.TIMER, spy)
+    t.start()
+    t.destroy()
+
+    setTimeout(function() {
+      expect(t.running).to.equal(false)
+      expect(s.callCount).to.equal(0)
+      done()
+    }, 10)
+  })
+
+  it('removes event listeners', function(done) {
+    const t = new Timer(2)
+    function noop() {
+      // do nothing
+    }
+    t.addEventListener(Timer.TIMER, noop)
+    t.start()
+    expect(t._callbacks).to.deep.equal({
+      [Timer.TIMER]: [noop],
+    })
+
+    t.destroy()
+
+    setTimeout(function() {
+      expect(t._callbacks).to.deep.equal({})
+      done()
+    }, 10)
+  })
+})
