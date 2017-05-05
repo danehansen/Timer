@@ -1,6 +1,6 @@
-const EventDispatcher = typeof __BROWSER__ === 'undefined' ? require('@danehansen/event-dispatcher').default : (((window || {}).danehansen || {}).EventDispatcher || {})
+import EventDispatcher from '@danehansen/event-dispatcher'
 
-export default class Timer extends EventDispatcher {
+class Timer extends EventDispatcher {
   static TIMER = 'TIMER'
   static TIMER_COMPLETE = 'TIMER_COMPLETE'
 
@@ -93,3 +93,5 @@ export default class Timer extends EventDispatcher {
         this.dispatchEvent(Timer.TIMER_COMPLETE)
       }
 }
+
+module.exports = Timer
