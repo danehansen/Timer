@@ -1,7 +1,7 @@
-# Timer
+# Timer ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@danehansen/timer.svg) ![npm](https://img.shields.io/npm/dt/@danehansen/timer.svg)
 
-__Class__ : public class [Timer](https://github.com/danehansen/Timer)  
-__Inheritance__ : [Timer](https://github.com/danehansen/Timer) > [EventDispatcher](https://github.com/danehansen/EventDispatcher) > Object
+**Class** : public class [Timer](https://github.com/danehansen/Timer)  
+**Inheritance** : [Timer](https://github.com/danehansen/Timer) > [EventDispatcher](https://github.com/danehansen/EventDispatcher) > Object
 
 The Timer class is the interface to setTimeout and setInterval, and is totally ripped off from the AS3 Timer class, but simplified. This class depends on EventDispatcher. Use the start() method to start a timer. Add an event listener for the timer event to set up code to be run on the timer interval.
 
@@ -38,35 +38,36 @@ In your browser:
 
 ## Public Constants
 
-* __TIMER__ : String = 'TIMER'  
-[static] The Timer.TIMER constant defines the value of the type property of a TIMER event object.
-* __TIMER&#95;COMPLETE__ : String = 'TIMER&#95;COMPLETE'  
-[static] The Timer.TIMER&#95;COMPLETE constant defines the value of the type property of a TIMER&#95;COMPLETE event object.
+- **TIMER** : String = 'TIMER'  
+  [static] The Timer.TIMER constant defines the value of the type property of a TIMER event object.
+- **TIMER_COMPLETE** : String = 'TIMER_COMPLETE'  
+  [static] The Timer.TIMER_COMPLETE constant defines the value of the type property of a TIMER_COMPLETE event object.
 
 ## Public Properties
-* __currentCount__ : int  
-[read-only] The total number of times the timer has fired since it started at zero.
-* __running__ : Boolean  
-[read-only] The timer's current state; true if the timer is running, otherwise false.
+
+- **currentCount** : int  
+  [read-only] The total number of times the timer has fired since it started at zero.
+- **running** : Boolean  
+  [read-only] The timer's current state; true if the timer is running, otherwise false.
 
 ## Public Methods
 
-* __Timer__(delay:Number, repeatCount:int = 0)  
-Constructs a new Timer object with the specified delay and repeatCount states.
-* __delay__(value:Number):*  
-Gets or sets the delay, in milliseconds, between timer events.
-* __repeatCount__(value:int):*  
-Gets or sets the total number of times the timer is set to run.
-* __reset__()  
-Stops the timer, if it is running, and sets the currentCount property back to 0, like the reset button of a stopwatch.
-* __start__()  
-Starts the timer, if it is not already running.
-* __stop__()  
-Stops the timer.
+- **Timer**(delay:Number, repeatCount:int = 0)  
+  Constructs a new Timer object with the specified delay and repeatCount states.
+- **delay**(value:Number):\*  
+  Gets or sets the delay, in milliseconds, between timer events.
+- **repeatCount**(value:int):\*  
+  Gets or sets the total number of times the timer is set to run.
+- **reset**()  
+  Stops the timer, if it is running, and sets the currentCount property back to 0, like the reset button of a stopwatch.
+- **start**()  
+  Starts the timer, if it is not already running.
+- **stop**()  
+  Stops the timer.
 
 ## Events
 
-* __TIMER__  
-Dispatched whenever a Timer object reaches an interval specified according to the Timer.delay property.
-* __TIMER&#95;COMPLETE__  
-Dispatched whenever it has completed the number of requests set by Timer.repeatCount.
+- **TIMER**  
+  Dispatched whenever a Timer object reaches an interval specified according to the Timer.delay property.
+- **TIMER_COMPLETE**  
+  Dispatched whenever it has completed the number of requests set by Timer.repeatCount.

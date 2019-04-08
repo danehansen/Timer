@@ -1,28 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
-    <title>Timer</title>
-    <link href='https://danehansen.github.io/package-helpers/styles.css' rel='stylesheet' />
+    <meta charset="utf-8" />
+    <title>timer</title>
+    <style>
+      body {
+  background-color: #fff;
+  color: #000;
+  font-family: Helvetica, Arial;
+  font-size: 12px;
+  padding: 50px;
+}
+
+body > div {
+  margin-top: 30px;
+  padding: 20px 0;
+  width: 600px;
+}
+
+body > div,
+footer {
+  border-top: 1px solid #000;
+}
+
+footer {
+  padding-top: 20px;
+}
+
+    </style>
   </head>
   <body>
-<h1>Timer</h1>
-
-<p><strong>Class</strong> : public class <a href="https://github.com/danehansen/Timer">Timer</a> <br />
-<strong>Inheritance</strong> : <a href="https://github.com/danehansen/Timer">Timer</a> > <a href="https://github.com/danehansen/EventDispatcher">EventDispatcher</a> > Object</p>
-
+    <h1>Timer <img src="https://img.shields.io/bundlephobia/minzip/@danehansen/timer.svg" alt="npm bundle size (scoped)" /> <img src="https://img.shields.io/npm/dt/@danehansen/timer.svg" alt="npm" /></h1>
+<p><strong>Class</strong> : public class <a href="https://github.com/danehansen/Timer">Timer</a><br />
+<strong>Inheritance</strong> : <a href="https://github.com/danehansen/Timer">Timer</a> &gt; <a href="https://github.com/danehansen/EventDispatcher">EventDispatcher</a> &gt; Object</p>
 <p>The Timer class is the interface to setTimeout and setInterval, and is totally ripped off from the AS3 Timer class, but simplified. This class depends on EventDispatcher. Use the start() method to start a timer. Add an event listener for the timer event to set up code to be run on the timer interval.</p>
-
 <p>You can create Timer objects to run once or repeat at specified intervals to execute code on a schedule.</p>
-
 <h2>Installation</h2>
-
 <p><code>npm install --save @danehansen/timer</code></p>
-
 <h2>Usage</h2>
-
 <p>As a module:</p>
-
 <pre><code>import Timer from '@danehansen/timer';
 
 var t = new Timer(500);
@@ -31,9 +47,7 @@ function onTimer(evt) {
 }
 t.addEventListener(Timer.TIMER, onTimer);
 </code></pre>
-
 <p>In your browser:</p>
-
 <pre><code>&lt;script src='danehansen-Timer.min.js'&gt;&lt;/script&gt;
 &lt;script&gt;
   var Timer = window.danehansen.Timer;
@@ -45,49 +59,42 @@ t.addEventListener(Timer.TIMER, onTimer);
   t.addEventListener(Timer.TIMER, onTimer);
 &lt;/script&gt;
 </code></pre>
-
 <h2>Public Constants</h2>
-
 <ul>
-<li><strong>TIMER</strong> : String = 'TIMER' <br />
+<li><strong>TIMER</strong> : String = 'TIMER'<br />
 [static] The Timer.TIMER constant defines the value of the type property of a TIMER event object.</li>
-<li><strong>TIMER&#95;COMPLETE</strong> : String = 'TIMER&#95;COMPLETE' <br />
-[static] The Timer.TIMER&#95;COMPLETE constant defines the value of the type property of a TIMER&#95;COMPLETE event object.</li>
+<li><strong>TIMER<em>COMPLETE</strong> : String = 'TIMER</em>COMPLETE'<br />
+[static] The Timer.TIMER<em>COMPLETE constant defines the value of the type property of a TIMER</em>COMPLETE event object.</li>
 </ul>
-
 <h2>Public Properties</h2>
-
 <ul>
-<li><strong>currentCount</strong> : int <br />
+<li><strong>currentCount</strong> : int<br />
 [read-only] The total number of times the timer has fired since it started at zero.</li>
-<li><strong>running</strong> : Boolean <br />
+<li><strong>running</strong> : Boolean<br />
 [read-only] The timer's current state; true if the timer is running, otherwise false.</li>
 </ul>
-
 <h2>Public Methods</h2>
-
 <ul>
-<li><strong>Timer</strong>(delay:Number, repeatCount:int = 0) <br />
+<li><strong>Timer</strong>(delay:Number, repeatCount:int = 0)<br />
 Constructs a new Timer object with the specified delay and repeatCount states.</li>
-<li><strong>delay</strong>(value:Number):* <br />
+<li><strong>delay</strong>(value:Number):*<br />
 Gets or sets the delay, in milliseconds, between timer events.</li>
-<li><strong>repeatCount</strong>(value:int):* <br />
+<li><strong>repeatCount</strong>(value:int):*<br />
 Gets or sets the total number of times the timer is set to run.</li>
-<li><strong>reset</strong>() <br />
+<li><strong>reset</strong>()<br />
 Stops the timer, if it is running, and sets the currentCount property back to 0, like the reset button of a stopwatch.</li>
-<li><strong>start</strong>() <br />
+<li><strong>start</strong>()<br />
 Starts the timer, if it is not already running.</li>
-<li><strong>stop</strong>() <br />
+<li><strong>stop</strong>()<br />
 Stops the timer.</li>
 </ul>
-
 <h2>Events</h2>
-
 <ul>
-<li><strong>TIMER</strong> <br />
+<li><strong>TIMER</strong><br />
 Dispatched whenever a Timer object reaches an interval specified according to the Timer.delay property.</li>
-<li><strong>TIMER&#95;COMPLETE</strong> <br />
+<li><strong>TIMER_COMPLETE</strong><br />
 Dispatched whenever it has completed the number of requests set by Timer.repeatCount.</li>
 </ul>
+    <script></script>
   </body>
 </html>
