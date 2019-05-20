@@ -22,7 +22,6 @@
   "author": "Dane Hansen <dane@danehansen.com> (http://www.danehansen.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@danehansen/package-helpers": "^0.2.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
@@ -34,7 +33,8 @@
     "webpack": "^2.5.1"
   },
   "dependencies": {
-    "@danehansen/event-dispatcher": "0.2.0"
+    "@danehansen/event-dispatcher": "0.2.0",
+    "@danehansen/package-helpers": "^0.2.1"
   },
   "repository": {
     "type": "git",
