@@ -1,3 +1,4 @@
+import "./fix-global-self";
 import Timer from "../src/Timer";
 import { expect } from "chai";
 import { spy } from "sinon";

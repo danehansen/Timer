@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   entry: {
     app: './src/Timer.js',
@@ -17,6 +19,7 @@ module.exports = {
     filename: 'danehansen-Timer.min.js',
     library: ['danehansen', 'Timer'],
     libraryTarget: 'umd',
+    path: __dirname,
   },
   externals: [
     {
